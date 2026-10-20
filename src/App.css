@@ -1,0 +1,40 @@
+.hover-dropdown {
+    position: relative;
+}
+
+/* Xóa mũi tên caret của Dropdown.Toggle */
+.hover-dropdown .dropdown-title::after {
+    content: none; /* Không hiển thị pseudo-element */
+}
+
+/* Xóa gạch chân */
+.hover-dropdown .dropdown-title {
+    text-decoration: none; /* Xóa gạch chân */
+    font-size: 1rem;
+    font-weight: 500;
+    color: black;
+    cursor: pointer;
+}
+
+/* Menu dropdown */
+.hover-dropdown .dropdown-menu {
+    display: none; /* Ẩn menu mặc định */
+    position: absolute;
+    top: 100%; /* Hiển thị ngay dưới tiêu đề */
+    left: 0;
+    z-index: 1000;
+    background-color: white; /* Nền trắng */
+    border: 1px solid #ccc; /* Viền */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+}
+
+/* Hiển thị menu khi hover */
+.hover-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Hiệu ứng hover trên item */
+.hover-dropdown .dropdown-item:hover {
+    background-color: #f8f9fa; /* Màu nền khi hover */
+    color: #000; /* Màu chữ */
+}

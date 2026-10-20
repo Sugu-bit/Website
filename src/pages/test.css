@@ -1,0 +1,70 @@
+/* test.css */
+
+/* Toàn bộ trang */
+.test-page {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+/* Tiêu đề chính */
+.test-page h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Mỗi section */
+.test-page section {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Tiêu đề từng section */
+.test-page section h2 {
+  margin-top: 0;
+  color: #0056b3;
+  font-size: 1.25rem;
+}
+
+/* Input và button */
+.test-page input {
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.test-page button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.test-page button:hover {
+  background-color: #0056b3;
+}
+
+/* Thông báo */
+.test-page p {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.xxx{
+  color: crimson;
+  margin: 50px 10px 10px 10px;
+  font-size: calc(1.325rem + .9vw);
+}
+
+textarea {
+  height: 10%;
+  width: 100%;
+}

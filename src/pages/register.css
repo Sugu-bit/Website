@@ -1,0 +1,26 @@
+.container-register {
+  max-width: 100%;
+}
+
+.btn-register {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+.text-danger{
+  color: red;
+}
+.custom-input{
+  height: 10px; /* Điều chỉnh chiều cao */
+  font-size: 0.9rem; /* Điều chỉnh kích thước font */
+  padding: 5px 10px; /* Điều chỉnh khoảng cách nội dung */
+}
+.fa-eye,
+.fa-eye-slash {
+  font-size: 1.2rem;
+  color: gray;
+}
+.fa-eye:hover,
+.fa-eye-slash:hover {
+  color: black;
+}

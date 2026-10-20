@@ -1,0 +1,8 @@
+.user-item {
+    margin-bottom: 20px; /* Khoảng cách giữa các người dùng */
+    padding: 10px;       /* Thêm padding xung quanh thông tin */
+    border: 1px solid #ccc; /* Đường viền cho dễ nhìn */
+    border-radius: 5px;  /* Bo góc cho viền */
+    background-color: #f9f9f9; /* Màu nền nhẹ */
+  }
+  
