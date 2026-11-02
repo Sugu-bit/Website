@@ -1,5 +1,10 @@
 import api, { handleError } from "./api";
 
+let pendingProductsRequest = null;
+let cachedProducts = null;
+let productsCachedAt = 0;
+const productCacheDuration = 30_000;
+
 const productApi = {
   /**
    * Lấy danh sách sản phẩm.
@@ -111,15 +116,49 @@ const productApi = {
       const response = await api.get(`/products`, {
         params: { page, limit }, // Tham số phân trang
       });
-      console.log("Fetching Products with:", response.data);
       return response.data; // Trả về dữ liệu sản phẩm
     } catch (error) {
       handleError(error);
     }
   },
+  getAllProducts: async () => {
+    if (cachedProducts && Date.now() - productsCachedAt < productCacheDuration) {
+      return cachedProducts;
+    }
+
+    if (!pendingProductsRequest) {
+      pendingProductsRequest = (async () => {
+        const pageSize = 1000;
+        const products = [];
+        let page = 1;
+        let pageProducts;
+
+        do {
+          pageProducts = await productApi.getPaginatedProducts(page, pageSize);
+          if (!Array.isArray(pageProducts)) {
+            throw new Error("Dữ liệu sản phẩm từ máy chủ không hợp lệ.");
+          }
+          products.push(...pageProducts);
+          page += 1;
+        } while (pageProducts.length === pageSize);
+
+        cachedProducts = products;
+        productsCachedAt = Date.now();
+        return products;
+      })();
+    }
+
+    const request = pendingProductsRequest;
+    try {
+      return await request;
+    } finally {
+      if (pendingProductsRequest === request) {
+        pendingProductsRequest = null;
+      }
+    }
+  },
   searchProductsByKeywords: async (keywords) => {
-    const response = await api.get(`/search/products?keywords=${keywords}`);
-    console.log(response)
+    const response = await api.get("/search/products", { params: { keywords } });
     if (response.data.status !== "success") {
       throw new Error("Không thể tải dữ liệu.");
     }

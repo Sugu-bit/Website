@@ -1,110 +1,92 @@
-import React, { useEffect, useState } from 'react';
-import productApi from '../../../api/productApi';
+import React, { useEffect, useState } from "react";
+import productApi from "../../../api/productApi";
 import GetInterfaceProduct from "../getInterfaceProduct";
 
-import Pagination from "./paginationBestSellProduct"; // Import component Pagination
-import DeleteAllBestSellProduct from './deleteAllFromBestSell';
-import DeleteFromBestSell from './deleteFromBestSell';
+const pageSize = 10;
 
 function BestSellProduct() {
-  const [bestSellProducts, setBestSellProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1); // Trạng thái của trang hiện tại
-  const productsPerPage = 10; // Số sản phẩm mỗi trang
-
-  // Hàm tính toán phân trang và lấy sản phẩm cho mỗi trang
-  const refreshBestSellProducts = async (page) => {
-    const bestSellProduct = JSON.parse(localStorage.getItem("bestSells")) || [];
-    if (bestSellProduct.length === 0) {
-      setBestSellProducts([]);
-      return;
-    }
-
-    // Giới hạn sản phẩm theo trang
-    const startIndex = (page - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage;
-    const paginationBestSellProducts = bestSellProduct.slice(startIndex, endIndex);
-
-    try {
-      const products = await Promise.all(
-        paginationBestSellProducts.map(async (id) => {
-          const product = await productApi.getProductById(id);
-          return product;
-        })
-      );
-      setBestSellProducts(products);
-    } catch (err) {
-      setError("Không thể tải danh sách sản phẩm ưu đãi.");
-    }
-  };
+  const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    refreshBestSellProducts(currentPage);
-    setLoading(false);
-  }, [currentPage]); // Khi currentPage thay đổi, sẽ tải lại sản phẩm cho trang đó
+    let active = true;
+    productApi.getAllProducts()
+      .then((items) => {
+        if (active) {
+          setProducts([...items].sort((first, second) => Number(second.popularity || 0) - Number(first.popularity || 0)));
+        }
+      })
+      .catch(() => {
+        if (active) setError("Không thể tải dữ liệu xếp hạng sản phẩm.");
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
 
-  if (loading) {
-    return <div>Đang tải...</div>;
-  }
+    return () => {
+      active = false;
+    };
+  }, []);
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  const hasRanking = products.some((product) => Number(product.popularity) > 0);
+  const totalPages = Math.ceil(products.length / pageSize);
+  const pageProducts = products.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
-  // Tính tổng số trang dựa trên số lượng sản phẩm trong localStorage
-  const bestSellProduct = JSON.parse(localStorage.getItem("bestSells")) || [];
-  const totalPages = Math.ceil(bestSellProduct.length / productsPerPage);
+  if (loading) return <p role="status">Đang tải...</p>;
+  if (error) return <p role="alert" className="text-red-600">{error}</p>;
 
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold mb-2">Danh sách sản phẩm ưu đãi</h2>
-        <DeleteAllBestSellProduct onRefresh={refreshBestSellProducts} />
-      </div>
-      <table className="min-w-full border-collapse table-fixed">
-        <thead>
-          <tr>
-            <th className="border p-2 text-left w-1/6">Tên</th>
-            <th className="border p-2 text-left w-1/6">Ảnh mô tả</th>
-            <th className="border p-2 text-left w-1/12">Giá tiền</th>
-            <th className="border p-2 text-left w-1/12">Số lượng</th>
-            <th className="border p-2 text-left w-1/6">Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bestSellProducts.length > 0 ? (
-            bestSellProducts.map((product) => (
+      <h2 className="text-xl font-semibold mb-2">Xếp hạng sản phẩm bán chạy</h2>
+      {!hasRanking && (
+        <p className="mb-4 text-sm text-amber-700" role="status">
+          Chưa có dữ liệu bán hàng để xếp hạng; danh sách bên dưới chỉ hiển thị sản phẩm hiện có.
+        </p>
+      )}
+      <div className="overflow-x-auto">
+        <table className="min-w-full border-collapse table-fixed">
+          <thead>
+            <tr>
+              <th className="border p-2 text-left">Tên</th>
+              <th className="border p-2 text-left">Ảnh</th>
+              <th className="border p-2 text-left">Giá</th>
+              <th className="border p-2 text-left">Tồn kho</th>
+              <th className="border p-2 text-left">Điểm quan tâm</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pageProducts.map((product) => (
               <tr key={product.id}>
                 <td className="border p-2">{product.name}</td>
                 <td className="border p-2">
-                  <GetInterfaceProduct productId={product.id} />
+                  <GetInterfaceProduct productId={product.id} className="h-16 w-16 object-contain" />
                 </td>
                 <td className="border p-2">
-                  {product.price ? product.price.toLocaleString() + " đ" : "N/A"}
+                  {product.price == null ? "Liên hệ" : `${new Intl.NumberFormat("vi-VN").format(product.price)} đ`}
                 </td>
-                <td className="border p-2">{product.stock || "N/A"}</td>
-                <td className="border p-2">
-                  <DeleteFromBestSell productId={product.id} onRefresh={refreshBestSellProducts} />
-                </td>
+                <td className="border p-2">{product.stock ?? "N/A"}</td>
+                <td className="border p-2">{product.popularity ?? "Chưa có dữ liệu"}</td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="5" className="border p-2 text-center">
-                Không có sản phẩm.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-
-      {/* Component Pagination */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage} // Cập nhật trang khi người dùng chọn trang mới
-      />
+            ))}
+            {pageProducts.length === 0 && (
+              <tr><td colSpan="5" className="border p-2 text-center">Chưa có sản phẩm.</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-3 p-4">
+          <button type="button" className="rounded border px-3 py-1 disabled:opacity-50" disabled={currentPage <= 1} onClick={() => setCurrentPage((page) => page - 1)}>
+            Trước
+          </button>
+          <span>{currentPage} / {totalPages}</span>
+          <button type="button" className="rounded border px-3 py-1 disabled:opacity-50" disabled={currentPage >= totalPages} onClick={() => setCurrentPage((page) => page + 1)}>
+            Sau
+          </button>
+        </div>
+      )}
     </div>
   );
 }

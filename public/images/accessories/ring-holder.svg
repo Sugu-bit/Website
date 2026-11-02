@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" fill="none">
+  <rect width="360" height="360" rx="28" fill="#F4F6FA"/>
+  <circle cx="180" cy="170" r="118" fill="#E8EEF8"/>
+  <rect x="139" y="74" width="82" height="157" rx="20" transform="rotate(-8 139 74)" fill="#fff" stroke="#66758A" stroke-width="8"/>
+  <circle cx="178" cy="190" r="24" stroke="#E04C43" stroke-width="10"/>
+  <path d="M197 207c35 14 48 39 39 57-10 21-40 20-71 6" stroke="#66758A" stroke-width="10" stroke-linecap="round"/>
+  <path d="m159 253-7 13m26 6-4 14m28-8 2 13" stroke="#E04C43" stroke-width="6" stroke-linecap="round"/>
+  <text x="180" y="316" fill="#404C5C" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle">VÒNG GIÁ ĐỠ</text>
+</svg>

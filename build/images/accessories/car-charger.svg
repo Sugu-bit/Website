@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" fill="none">
+  <rect width="360" height="360" rx="28" fill="#F4F6FA"/>
+  <circle cx="180" cy="170" r="118" fill="#E8EEF8"/>
+  <path d="M149 93h62v95l18 30v28a20 20 0 0 1-20 20h-58a20 20 0 0 1-20-20v-28l18-30V93Z" fill="#38475B" stroke="#66758A" stroke-width="8" stroke-linejoin="round"/>
+  <rect x="163" y="112" width="34" height="11" rx="5" fill="#AEBBCC"/>
+  <path d="M180 137v48" stroke="#6FD1B1" stroke-width="8" stroke-linecap="round"/>
+  <path d="M139 211h82m-66 39v-10m50 10v-10" stroke="#AEBBCC" stroke-width="7" stroke-linecap="round"/>
+  <text x="180" y="310" fill="#404C5C" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle">SẠC Ô TÔ</text>
+</svg>

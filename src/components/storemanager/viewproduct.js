@@ -5,8 +5,6 @@ import productApi from "../../api/productApi";
 import DeleteProduct from "./deleteproduct";
 import GetInterfaceProduct from "./getInterfaceProduct";
 import AddToSuggest from "./suggestproduct/addToSuggest";
-import AddToBestSell from "./bestsellproduct/addToBestSell";
-import AddToSpecial from "./specialproduct/addToSpecial";
 import Pagination from "../pagination"; // Import component Pagination
 
 function ViewProduct() {
@@ -83,6 +81,7 @@ function ViewProduct() {
             <th className="border p-2 text-left w-1/6">Ảnh mô tả</th>
             <th className="border p-2 text-left w-1/12">Giá tiền</th>
             <th className="border p-2 text-left w-1/12">Số lượng</th>
+            <th className="border p-2 text-left w-1/12">Giảm giá</th>
             <th className="border p-2 text-left w-1/12">Loại sản phẩm</th>
             <th className="border p-2 text-left w-1/12">Đặc tính</th>
             <th className="border p-2 text-left w-1/3">Mô tả</th>
@@ -103,10 +102,11 @@ function ViewProduct() {
                     {product.price ? product.price.toLocaleString() + " đ" : "N/A"}
                   </td>
                   <td className="border p-2">{product.stock || "N/A"}</td>
+                  <td className="border p-2">{Number(product.discountPercentage) || 0}%</td>
                   <td className="border p-2">
                     {categoryLoading
                       ? 'Đang tải...'
-                      : categories.find((cat) => cat.id === product.categoryId)?.description || 'Không xác định'}
+                      : categories.find((cat) => Number(cat.id) === Number(product.categoryId))?.description || 'Không xác định'}
                   </td>
                   <td className="border p-2 break-words">
                     {Object.entries(product.attributes || {})
@@ -148,15 +148,13 @@ function ViewProduct() {
                       onDelete={handleDelete}
                     />
                     <AddToSuggest productId={product.id} />
-                    <AddToBestSell productId={product.id} />
-                    <AddToSpecial productId={product.id} />
                   </td>
                 </tr>
               );
             })
           ) : (
             <tr>
-              <td colSpan="8" className="border p-2 text-center">
+              <td colSpan="9" className="border p-2 text-center">
                 Không có sản phẩm nào.
               </td>
             </tr>

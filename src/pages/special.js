@@ -3,6 +3,8 @@ import Navbar from '../components/navbar'
 import SpecialProducts from '../components/home/special'
 import Banner from '../components/banner'
 import { Link } from 'react-router-dom'
+import Footer from '../components/footer'
+import ConnectWidget from '../components/connectwidget'
 const Special = () => {
   return (
     <div>
@@ -41,6 +43,8 @@ const Special = () => {
         </div>
         <SpecialProducts />
       </div>
+      <ConnectWidget />
+      <Footer />
     </div>
   )
 }

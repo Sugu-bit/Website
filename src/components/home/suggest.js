@@ -17,9 +17,7 @@ const Suggest = () => {
     try {
       const products = await Promise.all(
         suggestions.map(async (id) => {
-          const product = await productApi.getProductById(id);
-          console.log(product)
-          return product;
+          return productApi.getProductById(id);
         })
       );
       setSuggestedProducts(products);
@@ -50,7 +48,7 @@ const Suggest = () => {
       after:right-0 after:w-1/4 after:h-0.5 after:bg-gray-300 after:translate-y-[-50%]">
         GỢI Ý HÔM NAY
       </h1> */}
-      <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-4 m-20">
+      <div className="home-product-grid">
         {suggestedProducts.length > 0 ? (
           suggestedProducts.map((product, key) => (
             <ProductCart key={key} data={product} />

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" fill="none">
+  <rect width="360" height="360" rx="28" fill="#F4F6FA"/>
+  <circle cx="180" cy="170" r="118" fill="#E8EEF8"/>
+  <path d="M151 79h58a20 20 0 0 1 20 20v132a25 25 0 0 1-25 25h-48a25 25 0 0 1-25-25V99a20 20 0 0 1 20-20Z" fill="#fff" stroke="#66758A" stroke-width="8"/>
+  <path d="M158 79V54m44 25V54" stroke="#66758A" stroke-width="9" stroke-linecap="round"/>
+  <rect x="163" y="106" width="34" height="12" rx="6" fill="#C5CFDE"/>
+  <path d="M183 137l-17 31h17l-7 28 20-36h-17l8-23Z" fill="#E04C43"/>
+  <text x="180" y="298" fill="#404C5C" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" text-anchor="middle">CỦ SẠC USB</text>
+</svg>

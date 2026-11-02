@@ -35,6 +35,7 @@ const EditProduct = () => {
           description: product.description || "",
           price: product.price || "",
           stock: product.stock || "",
+          discountPercentage: product.discountPercentage || 0,
           categoryId: product.categoryId || "",
           attribute: product.attributes || {},
         });
@@ -155,6 +156,20 @@ const EditProduct = () => {
           value={formData.stock}
           onChange={handleChange}
         />
+        <div>
+          <label className="block text-sm font-medium" htmlFor="edit-discount-percentage">Giảm giá (%)</label>
+          <input
+            id="edit-discount-percentage"
+            name="discountPercentage"
+            type="number"
+            min="0"
+            max="100"
+            step="1"
+            value={formData.discountPercentage}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
         <Select
           label="Danh mục"
           name="categoryId"

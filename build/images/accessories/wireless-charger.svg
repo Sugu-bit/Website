@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" fill="none">
+  <rect width="360" height="360" rx="28" fill="#F4F6FA"/>
+  <circle cx="180" cy="170" r="118" fill="#E8EEF8"/>
+  <path d="M143 91h74a16 16 0 0 1 16 16v111H127V107a16 16 0 0 1 16-16Z" fill="#fff" stroke="#66758A" stroke-width="8"/>
+  <rect x="155" y="104" width="50" height="82" rx="12" fill="#EEF2F7"/>
+  <circle cx="180" cy="145" r="19" stroke="#E04C43" stroke-width="6"/>
+  <path d="M171 145h18m-9-9v18" stroke="#E04C43" stroke-width="5" stroke-linecap="round"/>
+  <path d="M180 218v30c0 12 10 22 22 22h23" stroke="#66758A" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="231" cy="270" r="7" fill="#E04C43"/>
+  <text x="180" y="315" fill="#404C5C" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle">SẠC KHÔNG DÂY</text>
+</svg>

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'; // Import Link từ React Router
 import Navbar from '../components/navbar';
 import BestSellProducts from '../components/home/bestSell';
 import Banner from '../components/banner';
+import Footer from '../components/footer';
+import ConnectWidget from '../components/connectwidget';
 
 const BestSell = () => {
   return (
@@ -43,6 +45,8 @@ const BestSell = () => {
         {/* Danh sách sản phẩm */}
         <BestSellProducts />
       </div>
+      <ConnectWidget />
+      <Footer />
     </div>
   );
 };

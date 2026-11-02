@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" fill="none">
+  <rect width="360" height="360" rx="28" fill="#F4F6FA"/>
+  <circle cx="180" cy="170" r="118" fill="#E8EEF8"/>
+  <path d="M131 107c50-27 111 1 111 52 0 39-41 56-75 38-30-16-53 4-47 35 5 26 40 34 63 18" stroke="#66758A" stroke-width="14" stroke-linecap="round"/>
+  <path d="M130 105v-21m14 21V84m-23 0h32" stroke="#66758A" stroke-width="8" stroke-linecap="round"/>
+  <rect x="211" y="227" width="38" height="23" rx="7" transform="rotate(-35 211 227)" fill="#fff" stroke="#66758A" stroke-width="7"/>
+  <path d="m219 224 12 17" stroke="#E04C43" stroke-width="4" stroke-linecap="round"/>
+  <text x="180" y="298" fill="#404C5C" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" text-anchor="middle">CÁP SẠC</text>
+</svg>

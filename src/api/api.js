@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Định nghĩa baseURL duy nhất
-const BASE_URL = 'https://scime.click/api';
+const BASE_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000/api';
 
 // Tạo instance của Axios với baseURL
 const api = axios.create({

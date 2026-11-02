@@ -6,7 +6,7 @@ import EditProduct from "../components/storemanager/editproduct";
 import SuggestProduct from "../components/storemanager/suggestproduct/suggestProduct";
 import BestSellProduct from "../components/storemanager/bestsellproduct/bestSellProduct";
 import SpecialProduct from "../components/storemanager/specialproduct/specialProduct";
-import Logo from "../assets/logo1.png";
+import Logo from "../assets/buyp-logo.svg";
 import { HiChevronRight } from "react-icons/hi";
 import { FaStore } from "react-icons/fa";
 function StoreManager() {
@@ -17,7 +17,7 @@ function StoreManager() {
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/">
-            <img src={Logo} alt="Logo" className="w-24 h-auto max-w-full" />
+            <img src={Logo} alt="BuyP" className="w-24 h-auto max-w-full" />
           </Link>
           <h1 className="text-2xl">Kênh Người Bán</h1>
         </div>

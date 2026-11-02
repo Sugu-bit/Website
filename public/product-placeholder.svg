@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" fill="none">
+  <rect width="360" height="360" rx="24" fill="#F3F4F7"/>
+  <rect x="126" y="58" width="108" height="244" rx="24" fill="#D9DDE5"/>
+  <rect x="136" y="76" width="88" height="206" rx="16" fill="#FFFFFF"/>
+  <circle cx="180" cy="292" r="4" fill="#B5BBC7"/>
+  <path d="M168 171h24M180 159v24" stroke="#D94D42" stroke-width="7" stroke-linecap="round"/>
+  <text x="180" y="333" fill="#777C89" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle">Chưa có ảnh sản phẩm</text>
+</svg>

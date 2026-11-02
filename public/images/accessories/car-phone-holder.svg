@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" fill="none">
+  <rect width="360" height="360" rx="28" fill="#F4F6FA"/>
+  <circle cx="180" cy="170" r="118" fill="#E8EEF8"/>
+  <path d="M180 175v42l-31 34" stroke="#66758A" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="180" cy="172" r="17" fill="#fff" stroke="#66758A" stroke-width="8"/>
+  <rect x="120" y="78" width="120" height="119" rx="24" fill="#fff" stroke="#66758A" stroke-width="8"/>
+  <path d="M180 92v90m-48-45h96" stroke="#E04C43" stroke-width="11" stroke-linecap="round"/>
+  <path d="M138 267h-14m112 0h-14" stroke="#66758A" stroke-width="11" stroke-linecap="round"/>
+  <text x="180" y="315" fill="#404C5C" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle">GIÁ ĐỠ TRÊN Ô TÔ</text>
+</svg>

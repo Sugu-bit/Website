@@ -1,4 +1,4 @@
-import Logo from '../assets/logo1.png';
+import Logo from '../assets/buyp-logo.svg';
 import { Link } from "react-router-dom";
 // Navbar cho trang đăng kí đăng nhập
 function Navbar2() {
@@ -8,7 +8,7 @@ function Navbar2() {
                 {/* Logo */}
                 <div className="w-24 cursor-pointer">
                     <Link to="/">
-                        <img src={Logo} alt="Logo" className="w-full h-auto" />
+                        <img src={Logo} alt="BuyP" className="w-full h-auto" />
                     </Link>
                 </div>
             </div>

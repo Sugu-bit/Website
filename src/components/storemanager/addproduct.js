@@ -14,6 +14,7 @@ const AddProduct = () => {
     description: "",
     price: "",
     stock: "",
+    discountPercentage: 0,
     categoryId: "",
     attribute: {},
   });
@@ -99,6 +100,7 @@ const AddProduct = () => {
         description: "",
         price: "",
         stock: "",
+        discountPercentage: 0,
         categoryId: "",
         attribute: {},
       });
@@ -118,6 +120,20 @@ const AddProduct = () => {
         <Input label="Địa chỉ" name="locationAddress" value={formData.locationAddress} onChange={handleChange} error={errors.locationAddress} />
         <Input label="Giá" name="price" value={formData.price} onChange={handleChange} error={errors.price} />
         <Input label="Số lượng" name="stock" value={formData.stock} onChange={handleChange} error={errors.stock} />
+        <div>
+          <label className="block text-sm font-medium" htmlFor="discountPercentage">Giảm giá (%)</label>
+          <input
+            id="discountPercentage"
+            name="discountPercentage"
+            type="number"
+            min="0"
+            max="100"
+            step="1"
+            value={formData.discountPercentage}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
         <Select label="Danh mục" name="categoryId" value={formData.categoryId} onChange={handleChange} options={categories} error={errors.categoryId} />
         <Text label="Mô tả" name="description" value={formData.description} onChange={handleChange} error={errors.description} />
         <Attributes initialData={[]} onChange={handleAttributesChange} />

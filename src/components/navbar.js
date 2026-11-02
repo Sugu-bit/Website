@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Logo from '../assets/logo1.png';
+import Logo from '../assets/buyp-logo.svg';
 import { CiShoppingCart } from "react-icons/ci";
 import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -16,7 +16,6 @@ function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     // const [totalQuantity, setTotalQuantity] = useState(0);
     const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-    const [searchSidebarOpen, setSearchSidebarOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -31,27 +30,13 @@ function Navbar() {
     };
 
     const categories = [
-            { name: "Điện thoại", path: "smartphone" },
-            { name: "iPhone", path: "iphone" },
-            { name: "Android", path: "android" },
-            { name: "Điện thoại phổ thông", path: "basic-phone" },
-            { name: "Phụ kiện", path: "accessories" },
-            { name: "Ốp lưng & bao da", path: "cases" },
-            { name: "Kính cường lực", path: "screen-protector" },
-            { name: "Tai nghe & loa", path: "audio" },
-            { name: "Sạc & pin dự phòng", path: "charger-powerbank" },
-            { name: "Đồng hồ thông minh", path: "smartwatch" },
-            { name: "Máy tính bảng", path: "tablet" },
-            { name: "Khuyến mãi", path: "promotion" },
-            { name: "Tin tức công nghệ", path: "tech-news" },
-            { name: "Dịch vụ", path: "services" },
-            { name: "Bảo hành & sửa chữa", path: "warranty-repair" },
-            { name: "Thu cũ đổi mới", path: "trade-in" },
-            { name: "Mua trả góp", path: "installment" }
-                    
+        { name: "Điện thoại", path: "smartphone" },
+        { name: "iPhone", path: "iphone" },
+        { name: "Android", path: "android" },
+        { name: "Máy tính bảng", path: "tablet" },
+        { name: "Phụ kiện điện thoại", path: "accessories" },
+        { name: "Thiết bị âm thanh", path: "audio" },
     ];
-
-    const toggleSearchSidebar = () => setSearchSidebarOpen(!searchSidebarOpen);
     const { accessToken, user } = useSelector((state) => state.user);
     console.log(user);
     const dispatch = useDispatch();
@@ -105,15 +90,15 @@ function Navbar() {
                 {/* Logo - Centered on small screens */}
                 <div className="flex justify-center lg:justify-start">
                     <Link to="/">
-                        <img src={Logo} alt="Logo" className="w-24 h-auto max-w-full" />
+                        <img src={Logo} alt="BuyP" className="w-24 h-auto max-w-full" />
                     </Link>
                 </div>
 
                 {/* Left side menu (Home, Danh mục, etc.) */}
                 <div className="flex items-center space-x-10 lg:flex hidden">
-                    <a href="/" className="text-lg hover:text-gray-300">Trang Chủ</a>
+                    <Link to="/" className="text-lg hover:text-gray-300">Trang Chủ</Link>
                     <div className="relative group">
-                        <a href="/" className="text-lg hover:text-gray-300">Danh Mục</a>
+                        <Link to="/category/smartphone" className="text-lg hover:text-gray-300">Danh Mục</Link>
                         {/* Dropdown */}
                         <div className="hidden group-hover:block absolute top-[60%] left-0 w-80 bg-white border border-gray-300 mt-2 shadow-lg">
                             {categories.map((item, idx) => (
@@ -123,8 +108,8 @@ function Navbar() {
                             ))}
                         </div>
                     </div>
-                    <a href="/special" className="text-lg hover:text-gray-300">Giá Ưu Đãi</a>
-                    <a href="/bestsell" className="text-lg hover:text-gray-300">Sản Phẩm Bán Chạy</a>
+                    <Link to="/special" className="text-lg hover:text-gray-300">Giá Ưu Đãi</Link>
+                    <Link to="/bestsell" className="text-lg hover:text-gray-300">Sản Phẩm Bán Chạy</Link>
                 </div>
 
                 {/* Right side icons (Search, Heart, Cart, User) */}
@@ -252,7 +237,7 @@ function Navbar() {
                         {/* Menu Items */}
                         <div className="space-y-6">
                             <div>
-                                <a href="/" className="text-lg hover:text-gray-300">Home</a>
+                                <Link to="/" className="text-lg hover:text-gray-300" onClick={closeMenu}>Trang chủ</Link>
                             </div>
                             {/* Category with dropdown */}
                             <div>
@@ -270,7 +255,7 @@ function Navbar() {
                                 {isCategoryOpen && (
                                     <div className="pl-4 mt-2 space-y-2">
                                         {categories.map((item, idx) => (
-                                            <Link key={idx} to={`/category/${item.path}`} className="block px-4 py-2 hover:bg-gray-600 hover:text-gray-100">
+                                            <Link key={idx} to={`/category/${item.path}`} onClick={closeMenu} className="block px-4 py-2 hover:bg-gray-600 hover:text-gray-100">
                                                 {item.name}
                                             </Link>
                                         ))}
@@ -278,26 +263,14 @@ function Navbar() {
                                 )}
                             </div>
                             <div>
-                                <a href="/" className="text-lg hover:text-gray-300">Giá ưu đãi</a>
+                                <Link to="/special" className="text-lg hover:text-gray-300" onClick={closeMenu}>Giá ưu đãi</Link>
                             </div>
                             <div>
-                                <a href="/" className="text-lg hover:text-gray-300">Sản phẩm bán chạy</a>
+                                <Link to="/bestsell" className="text-lg hover:text-gray-300" onClick={closeMenu}>Sản phẩm bán chạy</Link>
                             </div>
                         </div>
                     </div>
                 </div>
-            )}
-            {searchSidebarOpen && (
-                <>
-                    <div className="fixed inset-0 bg-black bg-opacity-50 z-40 h-full" onClick={toggleSearchSidebar}></div>
-                    <div className="fixed top-0 right-0 w-2/5 h-full bg-white text-black z-50 shadow-lg p-4 transform transition-transform duration-300 ease-in-out" style={{ transform: searchSidebarOpen ? 'translateX(0)' : 'translateX(100%)' }}>
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            className="w-full h-10 px-4 rounded-full border border-gray-400 focus:border-gray-300 focus:outline-none"
-                        />
-                    </div>
-                </>
             )}
         </div>
     );

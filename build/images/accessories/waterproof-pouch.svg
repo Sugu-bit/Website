@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" fill="none">
+  <rect width="360" height="360" rx="28" fill="#F4F6FA"/>
+  <circle cx="180" cy="170" r="118" fill="#E8EEF8"/>
+  <path d="M129 91h102l-8 174h-86l-8-174Z" fill="#B9E4EA" fill-opacity=".75" stroke="#66758A" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M127 91h106v28H127z" fill="#fff" stroke="#66758A" stroke-width="8" stroke-linejoin="round"/>
+  <rect x="147" y="136" width="66" height="104" rx="13" fill="#fff" stroke="#7BAFBA" stroke-width="6"/>
+  <path d="M158 154h44m-44 12h44m-44 12h31" stroke="#D3E5E8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M169 73c-7 10-10 15-10 21a11 11 0 0 0 22 0c0-6-4-12-12-21Z" fill="#60AFC0"/>
+  <text x="180" y="311" fill="#404C5C" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="middle">TÚI CHỐNG NƯỚC</text>
+</svg>

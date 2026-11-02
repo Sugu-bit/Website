@@ -1,98 +1,80 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import fileApi from "../../api/fileApi";
+import api from "../../api/api";
 
-const GetInterfaceProduct = ({ productId, className }) => {
+const placeholderImage = "/product-placeholder.svg";
+
+function ProductImage({ src, alt, className }) {
+  return (
+    <img
+      src={src || placeholderImage}
+      alt={alt}
+      className={`object-cover ${className}`}
+      loading="lazy"
+      onError={(event) => {
+        event.currentTarget.onerror = null;
+        event.currentTarget.src = placeholderImage;
+      }}
+    />
+  );
+}
+
+function ApiProductImage({ productId, className, alt }) {
   const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [stopRetry, setStopRetry] = useState(false); // Biến dừng retry khi gặp lỗi
 
   useEffect(() => {
+    let active = true;
+
     const fetchFile = async () => {
-      if (!productId) {
-        setError("Product ID is required");
-        setFile(null);
-        return;
-      }
-
-      // Ngăn chặn gọi lại nếu `stopRetry` được kích hoạt
-      if (stopRetry) {
-        console.warn(`Fetching for productId: ${productId} has been stopped due to previous errors.`);
-        return;
-      }
-
       try {
-        setLoading(true);
         const response = await fileApi.getFilesByProduct(productId, true);
-        console.log("Response from API:", response);
+        const files = Array.isArray(response) ? response : response ? [response] : [];
+        const fileData = files.find((item) => item.filePath);
 
-        if (Array.isArray(response) && response.length > 0) {
-          const fileData = response[0];
-          if (!fileData.filePath) {
-            console.error("File path is invalid:", fileData);
-            setError("Đường dẫn file không hợp lệ");
-            setFile(null);
-            return;
-          }
-
-          fileData.fullPath = `https://scime.click/data/${fileData.filePath.replace(/\\/g, "/")}`;
-          setFile(fileData);
-          setError(null); // Xóa lỗi sau khi thành công
-        } else {
-          console.warn("File not found for productId:", productId);
-          setFile(null); // Đảm bảo file được đặt lại thành null
-          setError("Không tìm thấy file");
+        if (active && fileData) {
+          const filePath = fileData.filePath.replace(/\\/g, "/").replace(/^\/+/, "");
+          setFile({
+            ...fileData,
+            fullPath: new URL(`/data/${filePath}`, api.defaults.baseURL).toString(),
+          });
         }
-      } catch (err) {
-        // Dừng retry nếu gặp bất kỳ lỗi nào
-        console.error("Error fetching file:", err);
-
-        if (err.response && err.response.status === 502) {
-          console.error("Error 502: Bad Gateway");
-          setError("Lỗi server 502: Không thể tải ảnh.");
-        } else {
-          setError("Không thể tải ảnh đại diện sản phẩm");
+      } catch (error) {
+        if (active) {
+          console.error("Không thể tải ảnh sản phẩm:", error);
         }
-
-        setStopRetry(true); // Dừng mọi lần gọi lại trong tương lai
-        setFile(null);
-      } finally {
-        setLoading(false);
       }
     };
 
-    fetchFile();
-  }, [productId, stopRetry]); // Gọi API khi `productId` hoặc `stopRetry` thay đổi
+    if (productId) {
+      fetchFile();
+    }
 
-  if (loading) {
-    return <p>Đang tải ảnh...</p>;
-  }
+    return () => {
+      active = false;
+    };
+  }, [productId]);
 
-  // Nếu có lỗi hoặc không có ảnh, hiển thị ảnh mặc định
-  if (error || !file) {
+  return (
+    <ProductImage
+      src={file?.fullPath}
+      alt={alt || file?.fileName || "Ảnh sản phẩm"}
+      className={className}
+    />
+  );
+}
+
+function GetInterfaceProduct({ productId, imageUrl, alt, className }) {
+  if (imageUrl) {
     return (
-      <img
-        src="/default-image.png" // Đường dẫn đến ảnh mặc định
-        alt="Ảnh mặc định"
-        className={`object-cover ${className}`}
+      <ProductImage
+        src={imageUrl}
+        alt={alt || "Ảnh sản phẩm"}
+        className={className}
       />
     );
   }
 
-  return (
-    <img
-      src={file.fullPath}
-      alt={file.fileName || "Ảnh sản phẩm"}
-      className={`object-cover ${className}`}
-      loading="lazy"
-      onError={(e) => {
-        if (e.target.src !== "/default-image.png") {
-          e.target.onerror = null; // Ngăn chặn lặp lại lỗi
-          e.target.src = "/default-image.png";
-        }
-      }}
-    />
-  );
-};
+  return <ApiProductImage productId={productId} className={className} alt={alt} />;
+}
 
 export default GetInterfaceProduct;
