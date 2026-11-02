@@ -38,7 +38,7 @@ Dump `web.sql` chứa schema và dữ liệu PostgreSQL đã xuất sẵn. Sau k
 psql -U your_user -d shop -f .\web.sql
 ```
 
-Dump có tham chiếu đến các role PostgreSQL `postgres` và `Thang`. Nếu restore báo role không tồn tại, hãy tạo các role cần thiết hoặc điều chỉnh owner trong dump cho phù hợp với PostgreSQL cục bộ. Nếu bạn không dùng dump, hãy tạo schema theo entity và cấu hình Doctrine Migrations trước khi chạy API.
+Dump có các lệnh gán owner theo cấu hình PostgreSQL của môi trường đã xuất dữ liệu. Nếu restore báo role không tồn tại, hãy tạo role phù hợp hoặc điều chỉnh owner trong dump cho PostgreSQL cục bộ. Nếu bạn không dùng dump, hãy tạo schema theo entity và cấu hình Doctrine Migrations trước khi chạy API.
 
 ### 3. Khởi tạo người dùng và quyền (khi cần)
 

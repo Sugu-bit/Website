@@ -1,48 +1,34 @@
 # Shop website
 
-This React frontend works with the Symfony API in the separate `shop-backend` repository.
+This repository contains the React storefront. The Symfony API is a separate project and should be available in a sibling folder named `shop-backend`.
 
 ## Requirements
 
+- Windows with PowerShell
 - Node.js 22.11.0 or a compatible version, with npm
 - PHP 8.2 or newer and Composer
-- PostgreSQL, with a database configured for the backend
+- PostgreSQL 17 or a compatible version
 
-## Run the website on Windows
+## Run the website
 
-Clone both repositories into the same parent folder:
+### 1. Prepare the backend
 
-```powershell
-git clone https://github.com/Sugu-bit/Website.git shop-frontend
-git clone https://github.com/nguyen-huu-thang/shop-backend.git shop-backend
-```
+Place the Symfony backend project in a `shop-backend` folder next to this repository. Follow its [setup guide](./shop-backend/README.md) to install PHP dependencies, configure PostgreSQL, and load the database.
 
-In `shop-backend\.env.local`, configure `DATABASE_URL` for your PostgreSQL database. The database server must be running and the schema must be imported before starting the API. To create a database and load the supplied dump, for example:
+The backend API should be available at `http://127.0.0.1:8000`. Keep its terminal open.
 
-```powershell
-createdb -U <database-user> shop
-psql -U <database-user> -d shop -f shop-backend\web.sql
-```
+### 2. Start the frontend
 
-Open two PowerShell terminals from the parent folder. In the first, install backend dependencies and start the API:
+Open PowerShell in this repository and run:
 
 ```powershell
-cd shop-backend
-composer install
-$env:APP_ENV = "dev"
-$env:APP_DEBUG = "1"
-php -S 127.0.0.1:8000 -t public
-```
-
-In the second, install frontend dependencies and start the website:
-
-```powershell
-cd shop-frontend
 npm install
 $env:REACT_APP_API_URL = "http://127.0.0.1:8000/api"
 npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Keep both terminal windows open while using the website.
+Open [http://localhost:3000](http://localhost:3000). Keep the frontend terminal open while using the website.
 
-If the workspace's `run-shop.bat` launcher is available, you can run it instead of the two server commands. It checks PHP and npm, installs missing dependencies, and starts the frontend and API in separate windows. It does not start PostgreSQL or create/import the database.
+### Optional: use the Windows launcher
+
+If `run-shop.bat` is available in the parent folder containing both `shop-frontend` and `shop-backend`, run it to start both servers. The launcher does not start PostgreSQL or create or import the database; complete the backend setup first.
