@@ -1,0 +1,32 @@
+parameters:
+    UPLOAD_DIR: '%env(UPLOAD_DIR)%'
+    
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\Exception\ExceptionSubscriber:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+    
+    App\Service\AuthenticationService:
+        arguments:
+            $secretKey: '%env(JWT_SECRET)%'
+
+    App\Service\AuthorizationService: ~
+
+    App\EventListener\JwtAuthenticatorListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 10 }
+
+    App\Service\FileService:
+        arguments:
+            $uploadDir: '%UPLOAD_DIR%'

@@ -40,10 +40,10 @@ const Footer = () => (
         <h2 className="mb-4 font-bold uppercase">Tư vấn</h2>
         <p className="mb-3 text-sm text-slate-200">Liên hệ qua kênh tư vấn trực tuyến nếu bạn cần hỗ trợ chọn sản phẩm.</p>
         <div className="flex flex-col items-start gap-2 text-sm">
-          <a className="underline hover:text-white" href="https://zalo.me/0911936588" target="_blank" rel="noopener noreferrer">
+          <a className="underline hover:text-white" href="https://zalo.me/" target="_blank" rel="noopener noreferrer">
             Chat qua Zalo
           </a>
-          <a className="underline hover:text-white" href="https://m.me/an.nguyenxuan.739978" target="_blank" rel="noopener noreferrer">
+          <a className="underline hover:text-white" href="https://messenger.com/" target="_blank" rel="noopener noreferrer">
             Chat qua Messenger
           </a>
         </div>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        form input[type="file"],
+        form input[type="text"],
+        form button {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        form input[type="file"] {
+            border: 1px solid #ccc;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        form input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .result p {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>File Upload Test</h1>
+    <form id="uploadForm">
+        <input type="file" id="fileInput" name="file" required>
+        <input type="text" id="userIdInput" name="userId" placeholder="Enter User ID (optional)">
+        <input type="text" id="productIdInput" name="productId" placeholder="Enter Product ID (optional)">
+        <input type="text" id="reviewIdInput" name="reviewId" placeholder="Enter Review ID (optional)">
+        <button type="submit">Upload File</button>
+    </form>
+    <div class="result" id="result" style="display: none;"></div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const fileInput = document.getElementById('fileInput');
+            const userIdInput = document.getElementById('userIdInput').value;
+            const productIdInput = document.getElementById('productIdInput').value;
+            const reviewIdInput = document.getElementById('reviewIdInput').value;
+            const resultDiv = document.getElementById('result');
+
+            // Validate if a file is selected
+            if (!fileInput.files.length) {
+                alert('Please select a file to upload.');
+                return;
+            }
+
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            if (userIdInput) formData.append('userId', userIdInput);
+            if (productIdInput) formData.append('productId', productIdInput);
+            if (reviewIdInput) formData.append('reviewId', reviewIdInput);
+
+            // Send request
+            try {
+                const response = await fetch('/api/files', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await response.json();
+                resultDiv.style.display = 'block';
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<p class="success">Success: ${data.message}</p>
+                                           <p>File Path: ${data.file}</p>`;
+                } else {
+                    resultDiv.innerHTML = `<p class="error">Error: ${data.error}</p>`;
+                }
+            } catch (error) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `<p class="error">Error: An unexpected error occurred.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

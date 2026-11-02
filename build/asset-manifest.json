@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.dd4713a6.css",
-    "main.js": "/static/js/main.cf3dc11e.js",
+    "main.js": "/static/js/main.f43c6bed.js",
     "static/media/banner6.jpg": "/static/media/banner6.9cabfec033482cc33fa1.jpg",
     "static/media/banner8.jpg": "/static/media/banner8.24da3c62a5f76b66e34f.jpg",
     "static/media/banner4.jpg": "/static/media/banner4.cad25a783cb7714f95b8.jpg",
@@ -9,10 +9,10 @@
     "index.html": "/index.html",
     "static/media/buyp-logo.svg": "/static/media/buyp-logo.533472873d15a8e35cbaf5d6c3b386b6.svg",
     "main.dd4713a6.css.map": "/static/css/main.dd4713a6.css.map",
-    "main.cf3dc11e.js.map": "/static/js/main.cf3dc11e.js.map"
+    "main.f43c6bed.js.map": "/static/js/main.f43c6bed.js.map"
   },
   "entrypoints": [
     "static/css/main.dd4713a6.css",
-    "static/js/main.cf3dc11e.js"
+    "static/js/main.f43c6bed.js"
   ]
 }
